@@ -72,8 +72,8 @@ class ViewController: NSViewController, DragDropViewProtocol {
             let cacheFile = urls[0].URLByAppendingPathComponent(identifier!)
             
             do {
-                try fileManager.createDirectoryAtURL(cacheFile, withIntermediateDirectories: true, attributes: [:]);
-                let tmpImageName = NSString.localizedStringWithFormat("%ld.jpg", time(nil))
+                try fileManager.createDirectoryAtURL(cacheFile, withIntermediateDirectories: true, attributes: [:])
+                let tmpImageName = NSString.localizedStringWithFormat("%ld.jpg", NSDate.timeIntervalSinceReferenceDate())
                 let filePath = cacheFile.URLByAppendingPathComponent(tmpImageName as String)
 
                 let imageData = image.JPEGRepresentationWithCompressionFactor(0.8)
@@ -98,7 +98,9 @@ class ViewController: NSViewController, DragDropViewProtocol {
         }
         let pasteBoard = NSPasteboard.generalPasteboard();
         pasteBoard.clearContents();
-        pasteBoard.writeObjects([url]);
+        
+        let fileName = NSURL.init(string: url)?.lastPathComponent;
+        pasteBoard.writeObjects(["![".stringByAppendingString(fileName!).stringByAppendingString("](").stringByAppendingString(url).stringByAppendingString(")")]);
     }
     
     func uploadFile(file: NSString?) {
@@ -106,7 +108,7 @@ class ViewController: NSViewController, DragDropViewProtocol {
         textField.placeholderString = "文件上传中..."
         copyButton.enabled = false
         self.uploadManager.qiniuUpload(file, Name: file?.lastPathComponent) { (url) in
-            print("上传成功，外链地址是: %@", url)
+            print("上传成功，外链地址是：", url)
             self.textField.stringValue = url as! String
             let pasteBoard = NSPasteboard.generalPasteboard()
             pasteBoard.clearContents()
