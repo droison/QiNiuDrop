@@ -73,7 +73,7 @@ class ViewController: NSViewController, DragDropViewProtocol {
             
             do {
                 try fileManager.createDirectoryAtURL(cacheFile, withIntermediateDirectories: true, attributes: [:])
-                let tmpImageName = String(Int(NSDate.init().timeIntervalSince1970))
+                let tmpImageName = String(Int(NSDate.init().timeIntervalSince1970)).stringByAppendingString(".jpg")
                 let filePath = cacheFile.URLByAppendingPathComponent(tmpImageName as String)
 
                 let imageData = image.JPEGRepresentationWithCompressionFactor(0.8)
