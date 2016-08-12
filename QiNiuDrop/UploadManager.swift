@@ -8,11 +8,17 @@
 
 import Cocoa
 
-let AK = "七牛上的accessKey"
-let SK = "七牛上的secretKey"
-let bucket = "在七牛上你要上传的bucket名字"
-let bucketHost = "该bucket的外链相对地址"
+let AK = "1tcwA-6KJ0C4SVODQ2dE2TwsfGfCM5KzlR6Xm-9W"
+let SK = "woQvw6xOmNKCgxU8nDI8gARfNQE0OC5_-wJusa1h"
+let bucket = "chaisong-xyz"
+let bucketHost = "http://obp30zydr.bkt.clouddn.com/"
 
+/**
+let AK = "g4-e2qB0UfVA5b4K4vb4bVWRwtAWOktgFAzJUBQ2"
+let SK = "orCj8625m47ULqDV2-sGinCpVjnEGxTto6ZQrAMw"
+let bucket = "test"
+let bucketHost = "http://7xruw8.com1.z0.glb.clouddn.com/"
+**/
 
 class UploadManager: NSObject {
 
