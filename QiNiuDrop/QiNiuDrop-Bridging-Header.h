@@ -6,6 +6,5 @@
 //  Copyright © 2016年 song. All rights reserved.
 //
 
-
-#import <QiniuSDK.h>
+#import <Qiniu/QiniuSDK.h>
 #import "GenToken.h"
