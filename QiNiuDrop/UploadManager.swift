@@ -33,10 +33,11 @@ class UploadManager: NSObject {
     }
     var _qiniuUpManager: QNUploadManager? = nil
     
-    func qiniuUpload(filePath: NSString?, Name name: NSString?,Complete complete: (url : NSString?) -> Void) {
-        let token = GenToken.makeToken(AK, secretKey: SK, bucket: bucket)
-        self.qiniuUpManager.putFile(filePath! as String, key: "blog_".stringByAppendingString(name! as String), token: token, complete: { (reponseInfo : QNResponseInfo!, key : String!, resp : [NSObject : AnyObject]!) in
-            complete(url: bucketHost.stringByAppendingString(key));
+    func qiniuUpload(_ filePath: NSString?, Name name: NSString?, Complete complete: @escaping (_ url : NSString) -> Void) {
+        let token = GenToken.make(AK, secretKey: SK, bucket: bucket)
+        
+        self.qiniuUpManager.putFile(filePath! as String, key: "blog_".appendingFormat(name! as String), token: token, complete: { (reponseInfo, key, resp) in
+            complete(NSString.init(string: bucketHost.appending(key!)));
             }, option: nil)
     }
 }

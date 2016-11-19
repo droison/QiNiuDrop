@@ -19,24 +19,24 @@ class DragDropView: NSView {
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        self.registerForDraggedTypes([NSFilenamesPboardType]);
+        self.register(forDraggedTypes: [NSFilenamesPboardType]);
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func draggingEntered(sender: NSDraggingInfo) -> NSDragOperation {
+    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
         let pboard = sender.draggingPasteboard();
         if pboard.types!.contains(NSFilenamesPboardType) {
-            return .Copy;
+            return .copy;
         }
-        return .None
+        return NSDragOperation()
     }
     
-    override func prepareForDragOperation(sender: NSDraggingInfo) -> Bool {
+    override func prepareForDragOperation(_ sender: NSDraggingInfo) -> Bool {
         let zPasteboard = sender.draggingPasteboard();
-        let list = zPasteboard.propertyListForType(NSFilenamesPboardType) as! NSArray;
+        let list = zPasteboard.propertyList(forType: NSFilenamesPboardType) as! NSArray;
         if list.count > 0 {
             let firstFile = list.firstObject as! NSString;
             NSLog(">>> 暂时我们只支持第一个文件上传到七牛:%@", firstFile)

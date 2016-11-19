@@ -4,6 +4,8 @@
 platform :osx, '10.9'
 
 use_frameworks!
-pod "Qiniu", "~> 7.0.8"
 
+target "QiNiuDrop" do
+pod "Qiniu", "~> 7.0.8"
+end
 
